@@ -95,3 +95,21 @@ chunks = (filter_is_long_trip(chunk) for chunk in pd.read_csv(filename, chunksiz
 never in the memory simutanionslly!
 
 '''
+data = pd.read_csv('pb_cm_prodestoquedia_tst_hist_202007291054.csv')
+
+def filter_is_large_stock(data):
+    "Returns df filtering trips larger than 1000 units"
+    is_large_stock = (data.estoque_disponivel > 1000)
+    return data.loc[is_large_stock]
+
+chunks = [filter_is_long_trip(chunk) for chunk in pd.read_csv(filename, chunksize=1000)]
+
+#  filtering & summing with generators
+
+chunks = (filter_is_long_trip(chunk) for chunk in pd.read_csv(filename, chunksize=1000))
+
+'''
+never in the memory simutanionslly!
+
+'''
+
